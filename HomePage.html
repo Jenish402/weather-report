@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="./css/HomePage.css">
+    <link rel="icon" href="./images/mooncloud.png" type="image/png">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sub-main-container">
+            <div class="top-container">
+                <div class="logo-container">
+                    <p>WeatherApp</p>
+                </div>
+                <div class="searchbar-container">
+                    <div class="searchbar-class">
+                        <input id="searchBar" type="text" placeholder="Search here...">
+                        <button id="search-btn">Search</button>
+                    </div>
+                    <div class="location-class">
+                        <img class="locatorimg" src="./images/locater.png" alt="">
+                        <p class="locationname" id="locationName">No Data</p>
+                    </div>
+                </div>
+                <div class="nav-links-container">
+                    <div><a href="">About</a></div>
+                    <div><a href="">Cities</a></div>
+                </div>
+                <div class="contact-container">
+                    <button class="contact-btn">Contact</button>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="bottom-container">
+                <div class="bottom-left-container">
+                    <div class="left-top-container">
+                        <div class="left-top-left-class">
+                            <span class="span1">
+                                <img id="cityweathericon" class="city-icon" src="./images/mooncloud.png" alt="">
+                                <p id="carosolcityname" class="p1"></p>
+                                <p id="aboutday" class="p2">No</p>
+                                <p id="currentDay">No</p>
+                            </span>
+                            <span>
+                                <p id="carosolcitytemp" class="p3">0°C</p>
+
+                            </span>
+                        </div>
+
+                        <div class="left-top-right-class">
+                            <div id="CardContainer" class="card-container">
+                                <div class="blanck-mess">
+                                    <p class="blanck-p1">No data Available</p>
+                                    <p class="blanck-p2">Search the city </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="left-bottom-container">
+                        <div class="features-heading-container">
+                            <p>Today’s Weather info</p>
+                        </div>
+                        <div class="features-container">
+                            <div class="frature-container-row-1">
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img class="compass" src="./images/compass.png" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Day or Night</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="dayornot" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0°C</p> -->
+                                    </div>
+                                </div>
+
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img class="compass" src="./images/mooncloud.png" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Cloud</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="cloudornot" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0°C</p> -->
+                                    </div>
+                                </div>
+
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img id="rainyicon" class="compass" src="./images/rain.jpg" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Rain</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="rainornot" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0°C</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="frature-container-row-2">
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img class="compass" src="./images/drops.jpg" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Humidity</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="humidityornot" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0°C</p> -->
+                                    </div>
+                                </div>
+
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img class="compass" src="./images/redcompass.jpg" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Ultraviolet</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="ultravioletornot" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0°C</p> -->
+                                    </div>
+                                </div>
+
+                                <div class="featurecard">
+                                    <div class="featurecard-left-class">
+                                        <div class="class">
+                                            <img class="compass" src="./images/suncloud.jpg" alt="">
+                                        </div>
+                                        <div class="class">
+                                            <p class="compass-p1">Wind</p>
+                                        </div>
+                                    </div>
+                                    <div class="featurecard-right-class">
+                                        <p id="windspeed" class="compass-p2">No</p>
+                                        <!-- <p class="degree">0 kph</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-right-container">
+                    <div class="cities-title-container">
+                        <p>Other Cities</p>
+                    </div>
+                    <div class="cities-container">
+                        <div class="citycard">
+                            <div class="citycard-left-class">
+                                <div class="class">
+                                    <img id="suratWid" class="compass"  alt="">
+                                </div>
+                                <div class="class">
+                                    <p class="compass-p1">Surat</p>
+                                    <p id="suratData" class="compass-p2">normal</p>
+                                </div>
+                            </div>
+                            <div class="citycard-right-class">
+                                <p id="suratdegree" class="degree">40°C</p>
+                            </div>
+                        </div>
+                        <div class="citycard">
+                            <div class="citycard-left-class">
+                                <div class="class">
+                                    <img id="KhambhatWid" class="compass"  alt="">
+                                </div>
+                                <div class="class">
+                                    <p class="compass-p1">Khambhat</p>
+                                    <p id="KhambhatData" class="compass-p2">normal</p>
+                                </div>
+                            </div>
+                            <div class="citycard-right-class">
+                                <p id="Khambhatdegree" class="degree">40°C</p>
+                            </div>
+                        </div>
+                        <div class="citycard">
+                            <div class="citycard-left-class">
+                                <div class="class">
+                                    <img id="londonWid" class="compass"  alt="">
+                                </div>
+                                <div class="class">
+                                    <p class="compass-p1">London</p>
+                                    <p id="londonData" class="compass-p2">normal</p>
+                                </div>
+                            </div>
+                            <div class="citycard-right-class">
+                                <p id="londondegree" class="degree">40°C</p>
+                            </div>
+                        </div>
+                        <div class="citycard">
+                            <div class="citycard-left-class">
+                                <div class="class">
+                                    <img id="newyorkWid" class="compass"  alt="">
+                                </div>
+                                <div class="class">
+                                    <p class="compass-p1">New York</p>
+                                    <p id="newyorkData" class="compass-p2">normal</p>
+                                </div>
+                            </div>
+                            <div class="citycard-right-class">
+                                <p id="newyorkdegree" class="degree">40°C</p>
+                            </div>
+                        </div>
+                        <div class="seemore-class">
+                            <button class="seemore-btn"><a href="">See more >></a></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="./js/HomePage.js"></script>
+</body>
+
+</html>
