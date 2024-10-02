@@ -1,7 +1,7 @@
 let cityArr = ['surat', 'Khambhat', 'london', 'newyork'];
 
 cityArr.forEach((cityName) => {
-    let cityApi = `http://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${encodeURIComponent(cityName)}`;
+    let cityApi = `https://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${encodeURIComponent(cityName)}`;
 
     fetch(cityApi)
     .then((response) => {
@@ -63,8 +63,8 @@ document.getElementById('search-btn').addEventListener('click', () => {
     let searchInput = document.getElementById('searchBar').value;
     locationVariable = searchInput;
 
-    const weatherApi = `http://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${locationVariable}`;
-    const futureApi = `http://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=${locationVariable}&days=7`;
+    const weatherApi = `https://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${locationVariable}`;
+    const futureApi = `https://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=${locationVariable}&days=7`;
     // const futureApi = `http://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=&days=7`;
    
 
