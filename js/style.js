@@ -6,7 +6,7 @@ cityArr.forEach((cityName) => {
     fetch(cityApi)
     .then((response) => {
         if (!response.ok) {
-            throw new Error(response.statusText); 
+            throw new Error(`HTTP error! status: ${response.status}`); 
         }
         return response.json();
     })
@@ -56,136 +56,100 @@ cityArr.forEach((cityName) => {
     });
 });
 
-
-
-let locationVariable;
 document.getElementById('search-btn').addEventListener('click', () => {
     let searchInput = document.getElementById('searchBar').value;
-    locationVariable = searchInput;
+    let locationVariable = searchInput;
 
     const weatherApi = `https://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${locationVariable}`;
     const futureApi = `https://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=${locationVariable}&days=7`;
-    // const futureApi = `http://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=&days=7`;
-   
-
-    // fetch(`http://api.weatherapi.com/v1/current.json?key=4954087548a64399ab854348240110&q=${locationVariable}`)
-    // fetch('http://api.weatherapi.com/v1/forecast.json?key=4954087548a64399ab854348240110&q=LOCATION&days=7')
 
     Promise.all([
-        
-        fetch(weatherApi).then((response) => response.json()),
-        fetch(futureApi).then((response) => response.json())
-
-    ])
-        .then(([data, futureData]) => {
-            let weatherdata1 = data.location;
-            let weatherdata2 = data.current;
-            let weatherdata3 = data.current.condition;
-            let weatherdata4 = weatherdata3.icon;
-            let wfuturedata01 = futureData.forecast.forecastday;
-
-            let wlocationdata = '';
-            let wtempraturedata = '';
-            let wconditiondata = '';
-            let wclouddata = '';
-            let whumiditydata = '';
-            let wultraviletdata = '';
-            let wwindspeeddata = '';
-            let wdayornotdata = '';
-            let wforcastdata = '';
-
-
-            wlocationdata += `
-        <div>
-            
-            <p>${weatherdata1.name}</p>
-            
-        </div>
-        `
-            wtempraturedata += `
-        <div>
-            <p>${weatherdata2.temp_c}°C</p>
-        </div>
-        `
-            wconditiondata += `
-        <div>
-            <p>${weatherdata3.text}</p>
-        </div>
-        `
-            wclouddata += `
-        <div>
-            <p>${weatherdata2.humidity}</p>
-        </div>
-        `
-            whumiditydata += `
-        <div>
-            <p>${weatherdata2.cloud}%</p>
-        </div>
-        `
-            wultraviletdata += `
-        <div>
-            <p>${weatherdata2.uv}</p>
-        </div>
-        `
-            wwindspeeddata += `
-        <div>
-            <p>${weatherdata2.wind_kph}kph</p>
-        </div>
-        `
-            wdayornotdata += `
-        <div>
-            <p>${weatherdata2.is_day}</p>
-        </div>
-        `
-
-
-            if (weatherdata2.is_day === 1) {
-                document.getElementById('dayornot').innerHTML = 'Day';
+        fetch(weatherApi).then((response) => {
+            if (!response.ok) {
+                throw new Error(`Weather API error! status: ${response.status}`);
             }
-            else {
-                document.getElementById('dayornot').innerHTML = 'Night';
+            return response.json();
+        }),
+        fetch(futureApi).then((response) => {
+            if (!response.ok) {
+                throw new Error(`Forecast API error! status: ${response.status}`);
             }
-
-            let daysArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            let today = new Date();
-            let currentdayindex = today.getDay();
-            console.log(currentdayindex);
-            wfuturedata01.forEach((day, daynumber, dayindex) => {
-                
-                let forcastdayindex = (currentdayindex + dayindex)%7;
-                dayname = daysArr[forcastdayindex]
-                if(daynumber === 0){
-                    paddingClass = 'first-card';
-                }
-                wforcastdata += `<div class="card">
-                 <p class="day-temp">${day.day.avgtemp_c}°C</p>
-                    <p class="day-name">${daysArr[daynumber]}</p>
-                </div>`
-                
-            })
-            
-            document.getElementById('locationName').innerHTML = wlocationdata;
-            document.getElementById('carosolcityname').innerHTML = wlocationdata;
-            document.getElementById('carosolcitytemp').innerHTML = wtempraturedata;
-            document.getElementById('aboutday').innerHTML = wconditiondata;
-            document.getElementById('cityweathericon').src = `http:${weatherdata4}`;
-            document.getElementById('rainornot').innerHTML = wconditiondata;
-            document.getElementById('rainyicon').src = `http:${weatherdata4}`;
-            document.getElementById('cloudornot').innerHTML = wclouddata;
-            document.getElementById('humidityornot').innerHTML = whumiditydata;
-            document.getElementById('ultravioletornot').innerHTML = wultraviletdata;
-            document.getElementById('windspeed').innerHTML = wwindspeeddata;
-            document.getElementById('CardContainer').innerHTML = wforcastdata;
-            document.getElementById('currentDay').innerHTML = daysArr[currentdayindex];
-
-
+            return response.json();
         })
-        .catch(error => {
-            console.error('Error:', error); // Handle the error correctly
+    ])
+    .then(([data, futureData]) => {
+        let weatherdata1 = data.location;
+        let weatherdata2 = data.current;
+        let weatherdata3 = data.current.condition;
+        let weatherdata4 = weatherdata3.icon;
+        let wfuturedata01 = futureData.forecast.forecastday;
+
+        let wlocationdata = `<div><p>${weatherdata1.name}</p></div>`;
+        let wtempraturedata = `<div><p>${weatherdata2.temp_c}°C</p></div>`;
+        let wconditiondata = `<div><p>${weatherdata3.text}</p></div>`;
+        let wclouddata = `<div><p>${weatherdata2.humidity}%</p></div>`;
+        let whumiditydata = `<div><p>${weatherdata2.cloud}%</p></div>`;
+        let wultraviletdata = `<div><p>${weatherdata2.uv}</p></div>`;
+        let wwindspeeddata = `<div><p>${weatherdata2.wind_kph} kph</p></div>`;
+
+        let isDay = weatherdata2.is_day === 1 ? 'Day' : 'Night';
+        document.getElementById('dayornot').innerHTML = isDay;
+
+        let daysArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let today = new Date();
+        let currentdayindex = today.getDay();
+        
+        let wforcastdata = '';
+        wfuturedata01.forEach((day, index) => {
+            let dayIndex = (currentdayindex + index) % 7;
+            wforcastdata += `<div class="card">
+                <p class="day-temp">${day.day.avgtemp_c}°C</p>
+                <p class="day-name">${daysArr[dayIndex]}</p>
+            </div>`;
         });
 
+        // Update DOM elements
+        if (document.getElementById('locationName')) {
+            document.getElementById('locationName').innerHTML = wlocationdata;
+        }
+        if (document.getElementById('carosolcityname')) {
+            document.getElementById('carosolcityname').innerHTML = wlocationdata;
+        }
+        if (document.getElementById('carosolcitytemp')) {
+            document.getElementById('carosolcitytemp').innerHTML = wtempraturedata;
+        }
+        if (document.getElementById('aboutday')) {
+            document.getElementById('aboutday').innerHTML = wconditiondata;
+        }
+        if (document.getElementById('cityweathericon')) {
+            document.getElementById('cityweathericon').src = `http:${weatherdata4}`;
+        }
+        if (document.getElementById('rainornot')) {
+            document.getElementById('rainornot').innerHTML = wconditiondata;
+        }
+        if (document.getElementById('rainyicon')) {
+            document.getElementById('rainyicon').src = `http:${weatherdata4}`;
+        }
+        if (document.getElementById('cloudornot')) {
+            document.getElementById('cloudornot').innerHTML = wclouddata;
+        }
+        if (document.getElementById('humidityornot')) {
+            document.getElementById('humidityornot').innerHTML = whumiditydata;
+        }
+        if (document.getElementById('ultravioletornot')) {
+            document.getElementById('ultravioletornot').innerHTML = wultraviletdata;
+        }
+        if (document.getElementById('windspeed')) {
+            document.getElementById('windspeed').innerHTML = wwindspeeddata;
+        }
+        if (document.getElementById('CardContainer')) {
+            document.getElementById('CardContainer').innerHTML = wforcastdata;
+        }
+        if (document.getElementById('currentDay')) {
+            document.getElementById('currentDay').innerHTML = daysArr[currentdayindex];
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
-
-
-
-
